@@ -10,10 +10,10 @@
     <br><br>
 
     Tipo de Orquídea cultivada:
-    <select>
-        <option value="Phalaenopsis" id="option_orqA">Phalaenopsis</option>
-        <option value="Cattleya" id="option_orqB">Cattleya</option>
-        <option value="Vanda" id="option_orqC">Vanda</option>
+    <select id="select_orquidea">
+        <option value="Phalaenopsis">Phalaenopsis</option>
+        <option value="Cattleya">Cattleya</option>
+        <option value="Vanda">Vanda</option>
     </select><br><br>
 
     Quantidade de Orquídeas cultivadas (em média):
@@ -24,14 +24,52 @@
     <input type="number" id="input_qtdPessoas">
     <br><br>
 
-    Valor vendido por unidade: R$
+    Valor pretendido para vender cada unidade: R$
     <input type="number" id="input_valorUni">
     <br><br>
 
     <button onclick="calcular()">Calcular</button>
 
+    <div id="div_mensagem"></div>
+
 </body>
 </html>
 <script>
-    // realizar os calculos e se tiver alguma ideia acrescentar posteriormente
+    var valorCompOrquidea = 0; 
+    //valor comparativo do preço médio da orquidea selecionada sobre o preço que o cliente irá vender
+
+    function calcular() {
+        var orquideaSelecionada = select_orquidea.value;
+        var qtdOrquidea = Number(input_qtdOrquidea.value);
+        var qtdFuncionario = Number(input_qtdPessoas);
+        var valorUnidade = Number(input_valorUni.value);
+
+        if (orquideaSelecionada == "Phalaenopsis") {
+            valorCompOrquidea = 75;
+            if (valorUnidade < 20) {
+                div_mensagem.innerHTML = `<br><b>OBS: você está vendendo por um valor abaixo da média</b><br>`;
+            }
+        }
+        if (orquideaSelecionada == "Cattleya") {
+            valorCompOrquidea = 150;
+            if (valorUnidade < 30) {
+                div_mensagem.innerHTML = `<br><b>OBS: você está vendendo por um valor abaixo da média</b><br>`;
+            }
+        }
+        if (orquideaSelecionada == "Vanda") {
+            valorCompOrquidea = 250;
+            if (valorUnidade < 80) {
+                div_mensagem.innerHTML = `<br><b>OBS: você está vendendo por um valor abaixo da média</b><br>`;
+            }
+        }
+
+        var valorTotalOrquidea = ((valorCompOrquidea + valorUnidade) / 2) * qtdOrquidea;
+        //pega o valor médio daquele tipo de orquidea + valor pretendido para fazer uma média em que o valor de venda
+        //de cada orquidea se torne um bom valor para sua venda num geral
+
+        var valorMaoDeObra = 2500 * qtdFuncionario;
+        //     salário médio de um cuidador orquidea
+
+        //continuar
+    }
 </script>

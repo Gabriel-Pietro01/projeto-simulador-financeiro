@@ -41,7 +41,7 @@
     function calcular() {
         var orquideaSelecionada = select_orquidea.value;
         var qtdOrquidea = Number(input_qtdOrquidea.value);
-        var qtdFuncionario = Number(input_qtdPessoas);
+        var qtdFuncionario = Number(input_qtdPessoas.value);
         var valorUnidade = Number(input_valorUni.value);
 
         if (orquideaSelecionada == "Phalaenopsis") {
@@ -63,13 +63,20 @@
             }
         }
 
-        var valorTotalOrquidea = ((valorCompOrquidea + valorUnidade) / 2) * qtdOrquidea;
+        var valorTotalOrquidea = ((valorCompOrquidea + valorUnidade) / 2) * (qtdOrquidea - (qtdOrquidea * 0.1));
         //pega o valor médio daquele tipo de orquidea + valor pretendido para fazer uma média em que o valor de venda
-        //de cada orquidea se torne um bom valor para sua venda num geral
+        //de cada orquidea se torne um bom valor para sua venda num geral, após isso faz vezes a quantidade de orquidea
+        //plantada - 10% visto que segundo pesquisadores cada plantação perde cerca de 10% do total de orquideas plantadas
 
         var valorMaoDeObra = 2500 * qtdFuncionario;
         //     salário médio de um cuidador orquidea
 
-        //continuar
+        var totalSemServico = valorTotalOrquidea - valorMaoDeObra;
+
+        div_mensagem.innerHTML = `<br>Com os dados informados, sua margem financeira de lucro 
+                                pode ser de R$${totalSemServico.toFixed(2)} , isso levando em conta valores como
+                                mão de obra de funcionários, valor médio por unidade de orquidea e o tipo de orquidea
+                                informado.<br>Com nosso serviço de monitoramentos sua margem financeira de lucro pode crescer
+                                em até 15%, chegando a valores como R$${(totalSemServico + totalSemServico * 0.15).toFixed(2)}`;
     }
 </script>
